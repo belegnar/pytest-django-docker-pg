@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest_django_docker_pg"
+dynamic = ["version"]
+requires-python = ">=3.10"
+dependencies = [
+    "pytest>=7.0.0",
+    "docker>=6.1.0",
+]
+classifiers = [
+        "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Operating System :: OS Independent",
+        "Development Status :: 5 - Production/Stable",
+        "Framework :: Pytest"
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+
+[project.urls]
+homepage = "https://github.com/belegnar/pytest-django-docker-pg"
+changelog = "https://github.com/belegnar/pytest-django-docker-pg/CHANGELOG.md"
+
+[project.entry-points.pytest11]
+pytest_django_docker_pg = "pytest_django_docker_pg.plugin"
+
+[tool.setuptools]
+packages = ["pytest_django_docker_pg"]
+
+[tool.setuptools.package-data]
+pytest_django_docker_pg = ["py.typed", "VERSION"]
+
+[tool.setuptools.dynamic]
+version = { file = ["pytest_django_docker_pg/VERSION"] }
+
+[tool.pytest.ini_options]
+addopts = "-p pytest_django_docker_pg --django-docker-pg-image=postgres:16-alpine"
