@@ -37,7 +37,7 @@ def pytest_load_initial_conftests(early_config: pytest.Config, parser: pytest.Pa
 
 @pytest.hookimpl(trylast=True)
 def pytest_sessionfinish(session: pytest.Session):
-    container = cast(Container, pytest.django_docker_pg_container)
+    container = cast(Container, pytest.django_docker_pg_container)  # type: ignore[reportAttributeAccessIssue]
     assert container
     container.reload()
     if container.status == "running":
