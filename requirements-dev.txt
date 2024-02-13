@@ -4,12 +4,12 @@ flake8==7.0.0
 black==24.1.1
 setuptools==69.0.3
 wheel==0.42.0
-twine==4.0.2
-pyright==1.1.349
+twine==5.0.0
+pyright==1.1.350
 
 docker==7.0.0
 
-django==5.0.1
+django==5.0.2
 pytest-django==4.8.0
 
 -e .
