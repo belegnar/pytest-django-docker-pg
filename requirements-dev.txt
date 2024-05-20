@@ -4,8 +4,8 @@ flake8==7.0.0
 black==24.4.2
 setuptools==69.5.1
 wheel==0.43.0
-twine==5.0.0
-pyright==1.1.362
+twine==5.1.0
+pyright==1.1.363
 
 docker==7.0.0
 
