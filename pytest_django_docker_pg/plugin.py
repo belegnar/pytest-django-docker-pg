@@ -1,4 +1,5 @@
 import dataclasses
+import logging
 import os
 import socket
 import time
@@ -74,7 +75,8 @@ def start_postgres(image: str):
     assert isinstance(container, Container)
 
     started_at = time.time()
-    while time.time() - started_at < int(os.getenv("PYTEST_DJANGO_DOCKER_PG_CONTAINER_TIMEOUT", 30)):
+    timeout = int(os.getenv("PYTEST_DJANGO_DOCKER_PG_CONTAINER_TIMEOUT", 30))
+    while time.time() - started_at < timeout:
         container.reload()
         if container.status == "running" and _is_ready(container):
             break
@@ -82,7 +84,12 @@ def start_postgres(image: str):
         time.sleep(0.5)
     else:
         raw_logs = client.api.logs(container.id).decode()  # type: ignore[attr-defined]
-        pytest.fail(f"Failed to start django test postgres using postgres:16-alpine in 30" f" seconds:\n{raw_logs}")
+        if container.status == "running":
+            container.kill()
+        container.remove(v=True, force=True)
+        pytest.fail(
+            f"Failed to start django test postgres using postgres:16-alpine in {timeout} seconds:\n\n{raw_logs}"
+        )
 
     return (
         PG(
@@ -100,13 +107,15 @@ def _is_ready(container) -> bool:
     bindings = (container.attrs or {}).get("HostConfig", {}).get("PortBindings", {})
     assert bindings
     port = bindings["5432/tcp"][0]["HostPort"]
-    return is_pg_ready(
+    result = is_pg_ready(
         host=LOCALHOST,
         port=port,
         database=DEFAULT_PG_DATABASE,
         user=DEFAULT_PG_USER,
         password=DEFAULT_PG_PASSWORD,
     )
+    logging.debug(f"is_pg_ready result: {result}")
+    return result
 
 
 def _is_ready_psycopg3() -> Optional[Callable[..., bool]]:
