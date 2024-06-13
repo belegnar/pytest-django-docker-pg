@@ -26,3 +26,6 @@ DATABASES = {
 }
 
 ```
+
+The default timeout to start a postgres container is 30 seconds.
+ Can be adjusted in the `PYTEST_DJANGO_DOCKER_PG_CONTAINER_TIMEOUT` environment variable

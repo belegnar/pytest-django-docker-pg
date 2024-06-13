@@ -74,7 +74,7 @@ def start_postgres(image: str):
     assert isinstance(container, Container)
 
     started_at = time.time()
-    while time.time() - started_at < 30:
+    while time.time() - started_at < int(os.getenv("PYTEST_DJANGO_DOCKER_PG_CONTAINER_TIMEOUT", 30)):
         container.reload()
         if container.status == "running" and _is_ready(container):
             break
