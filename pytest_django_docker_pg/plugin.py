@@ -66,7 +66,7 @@ def start_postgres(image: str):
             "PGDATA": PGDATA,
         },
         command="-c fsync=off -c full_page_writes=off -c synchronous_commit=off -c bgwriter_lru_maxpages=0 -c jit=off",
-        ports={5432: unused_port},
+        ports={"5432": unused_port},
         detach=True,
         tmpfs={PGDATA: ""},
         stderr=True,
