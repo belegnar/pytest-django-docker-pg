@@ -2,10 +2,10 @@ pytest
 isort==5.13.2
 flake8==7.1.1
 black==24.8.0
-setuptools==74.1.2
+setuptools==75.0.0
 wheel==0.44.0
 twine==5.1.1
-pyright==1.1.379
+pyright==1.1.380
 
 docker==7.1.0
 
