@@ -5,7 +5,7 @@ black==24.8.0
 setuptools==75.1.0
 wheel==0.44.0
 twine==5.1.1
-pyright==1.1.381
+pyright==1.1.383
 
 docker==7.1.0
 
