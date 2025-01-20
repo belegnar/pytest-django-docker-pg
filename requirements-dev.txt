@@ -5,11 +5,11 @@ black==24.10.0
 setuptools==75.8.0
 wheel==0.45.1
 twine==6.0.1
-pyright==1.1.391
+pyright==1.1.392.post0
 
 docker==7.1.0
 
-django==5.1.4
+django==5.1.5
 pytest-django==4.9.0
 
 -e .
