@@ -1,15 +1,15 @@
 pytest
 isort==6.0.0
-flake8==7.1.1
+flake8==7.1.2
 black==25.1.0
 setuptools==75.8.0
 wheel==0.45.1
 twine==6.1.0
-pyright==1.1.393
+pyright==1.1.394
 
 docker==7.1.0
 
-django==5.1.5
-pytest-django==4.9.0
+django==5.1.6
+pytest-django==4.10.0
 
 -e .
