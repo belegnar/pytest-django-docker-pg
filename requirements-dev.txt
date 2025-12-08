@@ -9,7 +9,7 @@ pyright==1.1.407
 
 docker==7.1.0
 
-django==5.2.8
+django==5.2.9
 pytest-django==4.11.1
 
 -e .
